@@ -49,3 +49,17 @@ function serveStatic(response,cache,absPath) {
         })
     }
 }
+
+//创建一个HTTP服务 携带两个匿名函数
+var server = http.createServer(function(request,response) {
+    var filePath = false
+    // 当没有输入地址时 默认返回文件index
+    if(request.url == '/') {
+        filePath = 'public/index.html'
+    }else{
+        filePath = 'public' + request.url
+    }
+    // 选择同级目录中
+    var absPath = './' + filePath
+    serveStatic(response,cache,absPath)
+})
