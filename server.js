@@ -25,7 +25,6 @@ function sendFile(response,filePath,fileContents) {
 
 //提供静态文件服务 如果缓存中有文件内容在缓存中读取  如果没有才去文件中查找
 function serveStatic(response,cache,absPath) {
-    console.log(response)
     if(cache[absPath]){
         sendFile(response,absPath,cache[absPath])
     }else{
@@ -67,3 +66,7 @@ var server = http.createServer(function(request,response) {
 server.listen(3000,function() {
     console.log('server on localhost:3000')
 })
+//加载自定义socket模块
+var chatServer = require('./lib/chat_server')
+// 启动Socket.IO服务器，给它提供一个已经定义好的HTTP服务器，这样它就能跟HTTP服务器共享同一个TCP/IP端口
+chatServer.listen(server)
