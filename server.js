@@ -63,3 +63,7 @@ var server = http.createServer(function(request,response) {
     var absPath = './' + filePath
     serveStatic(response,cache,absPath)
 })
+// 指定3000端口启动服务
+server.listen(3000,function() {
+    console.log('server on localhost:3000')
+})
