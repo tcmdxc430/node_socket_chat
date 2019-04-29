@@ -19,7 +19,7 @@ Chat.prototype.changeRoom = function(room) {
     })
 }
 // 文字命令识别
-Chat.prototype.proccessCommand = function(command) {
+Chat.prototype.processCommand = function(command) {
     // 字符串间空格用逗号分隔 返回数组
     var words = command.split(' ')
     // 将拿到的第一个字符串(命令关键字) 从第二个字符开始到结尾(由于第一个字符是/)
@@ -28,20 +28,19 @@ Chat.prototype.proccessCommand = function(command) {
     switch(command) {
         // 进入房间命令
         case 'join':
-        // 将数组中第一个(命令关键字)删除
-        words.shift()
-        // 数组内容转乘字符串  空格分隔(因为用户输入的是空格)
-        var room = words.join(' ')
-        this.changeRoom(room)
-        break
+            // 将数组中第一个(命令关键字)删除
+            words.shift()
+            // 数组内容转乘字符串  空格分隔(因为用户输入的是空格)
+            var room = words.join(' ')
+            this.changeRoom(room)
+            break
         case 'nick':
-        words.shift()
-        var name = words.join(' ')
-        this.socket.emit('nameAttemp',name)
-        break
+            words.shift()
+            var name = words.join(' ')
+            this.socket.emit('nameAttempt',name)
+            break
         default:
         message = '无效命令'
-        break
     }
     return message
 }
